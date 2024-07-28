@@ -1,0 +1,417 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@400..700&family=Pacifico&family=Playwrite+HR:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+--deep-blue: #003366;
+--bright-teal: #00B2A9;
+--light-gray: #F5F5F5;
+--soft-white: #FFFFFF;
+--dark-gray: #333333;
+--green: #4CAF50;
+--red: #F44336;
+--orange: #FFC107;
+--hover-blue: #0077b6;
+}
+
+/* Global Styles */
+body {
+font-family: 'Lato', sans-serif;
+color: var(--dark-gray);
+background-color: var(--light-gray);
+}
+
+/* Header */
+header {
+background-color: var(--deep-blue);
+color: var(--soft-white);
+}
+
+p {
+    font-size: 18px;
+}
+
+/* Headings */
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem; /* 40px */
+  color: var(--deep-blue);
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem; /* 32px */
+  color: var(--deep-blue);
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.75rem; /* 28px */
+  color: var(--hover-blue);
+  margin-bottom: 12px;
+}
+
+h4 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem; /* 24px */
+  color: var(--bright-teal);
+  margin-bottom: 10px;
+}
+
+h5 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25rem; /* 20px */
+  color: var(--dark-gray);
+  margin-bottom: 8px;
+}
+
+h6 {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem; /* 16px */
+  color: var(--dark-gray);
+  margin-bottom: 6px;
+}
+
+/* Example of usage */
+header h1 {
+  font-size: 2.5rem; /* 40px */
+}
+
+.section-title h2 {
+  font-size: 2rem; /* 32px */
+}
+
+.card-title h3 {
+  font-size: 1.75rem; /* 28px */
+}
+
+.subheading h4 {
+  font-size: 1.5rem; /* 24px */
+}
+
+.text-small h5 {
+  font-size: 1.25rem; /* 20px */
+}
+
+.footer-text h6 {
+  font-size: 1rem; /* 16px */
+}
+
+
+/* Buttons */
+button.primary {
+background-color: var(--bright-teal);
+color: var(--soft-white);
+}
+
+button.secondary {
+background-color: var(--green);
+color: var(--soft-white);
+}
+
+/* Alerts */
+.alert-error {
+color: var(--red);
+}
+
+.alert-success {
+color: var(--green);
+}
+
+
+/* Header section */
+header .container, footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 150px;
+}
+
+header .container .logo, footer .container .logo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .container .logo h3, footer .container .logo h3 {
+    color: var(--soft-white);
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+header .container nav ul, footer .container nav ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    text-decoration: none;
+}
+
+header .container nav ul li, footer .container nav ul li {
+    padding-inline: 10px;
+}
+
+header .container nav ul a, footer .container nav ul a {
+    color: var(--soft-white);
+    text-decoration: none;
+}
+
+.logo i {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+/* Navigation */
+nav a {
+color: var(--deep-blue);
+}
+
+/* HERO SECTION */
+.hero {
+    background-image: url('/static/images/hero1.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    height: 70vh;
+}
+
+.hero h1 {
+    font-size: 45px;
+    margin: 0px 150px;
+    width: 600px;
+    color: var(--soft-white);
+    padding-top: 150px;
+}
+
+.hero h1 span {
+    color: var(--deep-blue);
+}
+
+.hero p {
+    color: var(--soft-white);
+    font-size: 22px;
+    margin: 30px 150px;
+}
+
+.hero a {
+    margin: 0px 150px;
+    list-style: none;
+    text-decoration: none;
+    border: #003366;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: var(--soft-white);
+    letter-spacing: .3em;
+    color: var(--deep-blue);
+    transition: background 0.3s;
+}
+
+.hero a:hover {
+    background-color: var(--hover-blue);
+    color: #fff;
+}
+
+/* call to action */
+.call-to-action {
+    height: 40vh;
+    text-align: center;
+}
+
+.call-to-action .call-action {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 700px;
+    margin: 50px auto;
+}
+
+.call-action a {
+    padding: 15px;
+    border: 1px solid var(--deep-blue);
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
+    border-radius: 25px;
+    color: var(--deep-blue);
+    transition: background 0.3s;
+}
+
+.call-action a:hover {
+    background-color: var(--hover-blue);
+    color: var(--soft-white);
+}
+
+/* feature section */
+.feature-section {
+    background: url('/static/images/slide-image.jpg') no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.feature-section .container {
+    width: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.feature {
+    display: none;
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    margin: 20px 0;
+    border-radius: 8px;
+}
+.feature img {
+    width: 40px;
+}
+
+.feature h2 {
+    margin-top: 0;
+}
+
+.feature p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.feature .cta-button {
+    display: inline-block;
+    padding: 15px;
+    margin-top: 10px;
+    color: var(--deep-blue);
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background 0.3s;
+    letter-spacing: .3em;
+    border: 1px solid var(--deep-blue);
+}
+
+.feature .cta-button:hover {
+    background: var(--hover-blue);
+    color: var(--soft-white);
+}
+
+.feature.active {
+    display: block;
+}
+
+/* Card Section*/
+
+.card-section {
+    background-image: url('/static/images/nodes.png');
+    padding: 50px 150px;
+}
+
+.card-section h2 {
+    text-align: center;
+}
+
+.card-section h2 span {
+    color: var(--dark-gray);
+}
+
+.card-section .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.card {
+    background-color: var(--soft-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    height: 180px;
+    margin-block: 15px;
+}
+
+/* testimonial section */
+
+.testimonial-section {
+    background-color: #fff;
+    padding: 50px 150px;
+}
+
+.testimonial-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    text-align: center;
+    display: flex;
+}
+
+.testimonial-section h2 {
+text-align: center;
+}
+
+.testimonial {
+    display: inline-block;
+    width: 30%;
+    margin: 0 10px;
+    vertical-align: top;
+    text-align: left;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.testimonial img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.testimonial blockquote {
+    font-size: 1.1em;
+    color: #555;
+    margin: 0;
+    padding: 0;
+}
+
+.testimonial blockquote p {
+    margin-bottom: 10px;
+}
+
+.testimonial footer {
+    font-size: 22px;
+    color: var(--hover-blue);
+    background: var(--soft-white);
+
+}
+
+/* Responsive Design for Testimonial Section */
+@media (max-width: 768px) {
+    .testimonial {
+        width: 45%;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonial {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+
+/* Footer */
+footer {
+background-color: var(--deep-blue);
+color: var(--soft-white);
+}
+
