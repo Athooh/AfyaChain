@@ -1,3 +1,7 @@
+Here is the link to chatgpt response:
+https://chatgpt.com/share/25532be1-0310-4042-a301-9087970b77b9
+
+
 Backend (Go)
 cmd/server/
 main.go: The entry point of the application, initializing the server, setting up routes, and starting the server.
