@@ -24,3 +24,9 @@ type Patient struct {
 	CreatedAt      time.Time       `json:"created_at"`
 	UpdatedAt      time.Time       `json:"updated_at"`
 }
+type AccessLog struct {
+	PatientID int    `json:"patient_id"`
+	UserID    int    `json:"user_id"`
+	Action    string `json:"action"` // e.g., "view", "edit"
+	Timestamp string `json:"timestamp"`
+}
