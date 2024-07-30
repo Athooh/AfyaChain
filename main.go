@@ -23,19 +23,20 @@ func main() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 	// Auto Migrate the schema
-	err = db.AutoMigrate(&models.Patient{}, &models.MedicalRecord{})
+	err = db.AutoMigrate(&models.Patient{})
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}
-	
+
 	http.HandleFunc("/patient", handler.CreatePatient) // Use POST for creating
-	http.HandleFunc("/all", handler.GetAllPatients) // Use POST for creating
+	http.HandleFunc("/all", handler.GetAllPatients)    // Use POST for creating
 	http.HandleFunc("/patient/", handler.GetPatientHandler)
 	http.HandleFunc("/", handler.HomeHandler)
 	http.HandleFunc("/about", handler.AboutHandler)
 	http.HandleFunc("/login", handler.LoginHandler)
 	http.HandleFunc("/signup", handler.SignupHandler)
 	http.HandleFunc("/signup/facility", handler.SignupFacilityHandler)
+	http.HandleFunc("/facility/dashboard", handler.DoctorDashHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	fmt.Println("Server started at http://localhost:8080")
 
