@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfyaChain - Revolutionizing Healthcare Management</title>
+    <link rel="stylesheet" href="/static/css/dash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar" id="sidebar">
+          <h2>Patient History</h2>
+          <div id="patientHistory"></div>
+          <a href="#" class="view-all-btn" onclick="showAllHistory()">View All History</a>
+        </div>
+        <div class="main-content">
+          <div class="header">
+            <h1>Doctor's Dashboard</h1>
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+          </div>
+          <div class="search-form">
+            <input type="text" id="patientSearch" placeholder="Enter patient name or ID">
+            <button onclick="searchPatient()">Search</button>
+          </div>
+          <div class="patient-info">
+            <h2>Patient Information</h2>
+            <table id="patientInfoTable"></table>
+          </div>
+          <div class="medical-records">
+            <h2>Medical Records</h2>
+            <div id="medicalRecords"></div>
+            <div class="otp-verification" id="otpVerification" style="display:none;">
+              <p>An OTP has been sent to the patient's registered contact.</p>
+              <input type="text" id="otpInput" class="otp-input" placeholder="Enter OTP">
+              <button onclick="verifyOTP()">Verify OTP</button>
+            </div>
+          </div>
+          <div class="new-record-form" id="newRecordForm" style="display:none;">
+            <h2>Add New Medical Record</h2>
+            <form id="medicalRecordForm">
+              <div class="form-group">
+                <label for="visitDate">Visit Date:</label>
+                <input type="date" id="visitDate" required>
+              </div>
+              <div class="form-group">
+                <label for="visitType">Visit Type:</label>
+                <select id="visitType" required>
+                  <option value="">Select visit type</option>
+                  <option value="Routine Checkup">Routine Checkup</option>
+                  <option value="Emergency">Emergency</option>
+                  <option value="Follow-up">Follow-up</option>
+                  <option value="Specialist Consultation">Specialist Consultation</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="symptoms">Symptoms:</label>
+                <textarea id="symptoms" placeholder="Describe the symptoms"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="diagnosis">Diagnosis:</label>
+                <textarea id="diagnosis" placeholder="Enter diagnosis"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="treatment">Treatment:</label>
+                <textarea id="treatment" placeholder="Describe the treatment plan"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="prescription">Prescription:</label>
+                <textarea id="prescription" placeholder="Enter prescription details"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="notes">Additional Notes:</label>
+                <textarea id="notes" placeholder="Any additional notes"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="cost">Cost ($):</label>
+                <input type="number" id="cost" min="0" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label for="fileUpload" class="file-upload">
+                  <input type="file" id="fileUpload" multiple>
+                  Upload Files/Images
+                </label>
+                <span id="fileList"></span>
+              </div>
+              <button type="button" class="submit-btn" onclick="submitNewRecord()">Submit New Record</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div id="historyModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Full Medical Record</h2>
+          <div id="fullHistoryContent"></div>
+        </div>
+      </div>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <p>&copy; 2024 AfyaChain. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="login">LOGIN</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
