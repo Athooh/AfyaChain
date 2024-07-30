@@ -393,6 +393,170 @@ text-align: center;
 
 }
 
+/* signup pages */
+.form-container {
+    padding: 50px 150px;
+}
+
+form {
+    width: 50%;
+}
+
+.form-container h2 {
+    text-align: center;
+}
+
+.form-container h3 {
+    text-align: center;
+}
+
+.form-container ul {
+    width: 300px;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-container ul li {
+    list-style: none;
+}
+
+.form-container ul li a {
+    text-decoration: none;
+    color: var(--deep-blue);
+}
+
+.form-card {
+    display: flex; 
+    justify-content: space-around;
+}
+
+.form-card img {
+    width: 45%;
+}
+
+.form-group {
+    margin-bottom: 1em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.form-group input[type="radio"] {
+    width: auto;
+    margin-right: 0.5em; 
+}
+
+input#updates, input#terms  {
+    width: 30px; 
+}
+
+.form-group .password-instructions {
+    font-size: 0.9em;
+    color: #666;
+    margin-top: 0.5em;
+}
+
+.form-group .checkbox-group {
+    display: flex;
+    align-items: center;
+}
+.form-group .checkbox-group input[type="checkbox"] {
+    margin-right: 0.5em;
+}
+
+.form-actions {
+    margin-top: 1em;
+    text-align: right;
+}
+
+.form-actions button.register {
+    border-radius: 25px;
+    padding: 15px;
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    letter-spacing: .3em;
+    margin-left: 30px;
+    border: 1px solid var(--deep-blue);
+}
+
+.form-actions button.back {
+    border: 1px solid var(--deep-blue);
+    padding: 15px 20px;
+    border-radius: 25px;
+    letter-spacing: 0.3em;
+    color: var(--deep-blue);
+}
+
+.form-actions button:hover {
+    opacity: 0.9;
+}
+
+.form-actions button.back:hover {
+    background-color: var(--hover-blue);
+    color: var(--soft-white);
+}
+
+.form-actions button:hover {
+    opacity: 0.9;
+}
+
+.form-actions button.back {
+    background-color: #007bff;
+    font-size: 16px;
+    color: var(--soft-white);
+}
+
+.form-actions button.back:hover {
+    background-color: #0056b3;
+}
+.form-actions button.register {
+    color: var(--soft-white);
+}
+.form-actions button.register:hover {
+    background-color: var(--green);
+}
+
+button.google-login {
+    background-color: #0077b6;
+    border-radius: 25px;
+    margin-block: auto;
+}
+
+button.google-login img {
+    width: 40px;
+    height: 40px;
+}
+
+button.login {
+    padding: 15px 20px;
+    border: 1px solid var(--deep-blue);
+    letter-spacing: .3em;
+    margin-left: 30px;
+    border-radius: 25px;
+    background-color: var(--green);
+    font-size: 16px;
+    color: var(--soft-white);
+}
+
+button.login:hover {
+    color: var(--soft-white);
+    background-color: var(--hover-blue);
+}
+
+
 /* Responsive Design for Testimonial Section */
 @media (max-width: 768px) {
     .testimonial {

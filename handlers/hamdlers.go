@@ -33,6 +33,21 @@ func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
+func SignupHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/signup.html"))
+	tmpl.Execute(w, nil)
+}
+
+func LoginHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/login.html"))
+	tmpl.Execute(w, nil)
+}
+
+func SignupFacilityHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/signup_facility.html"))
+	tmpl.Execute(w, nil)
+}
+
 // func renderForm(w http.ResponseWriter, data PageData) {
 // 	tmpl := template.Must(template.ParseFiles("templates/form.html"))
 // 	err := tmpl.Execute(w, data)

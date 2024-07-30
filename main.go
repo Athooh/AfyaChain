@@ -15,6 +15,9 @@ func main() {
 	}
 	http.HandleFunc("/", handler.HomeHandler)
 	http.HandleFunc("/about", handler.AboutHandler)
+	http.HandleFunc("/login", handler.LoginHandler)
+	http.HandleFunc("/signup", handler.SignupHandler)
+	http.HandleFunc("/signup/facility", handler.SignupFacilityHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	fmt.Println("Server started at http://localhost:8080")
 	err := http.ListenAndServe(":8080", nil)
