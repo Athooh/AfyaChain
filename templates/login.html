@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfyaChain - Revolutionizing Healthcare Management</title>
+    <link rel="stylesheet" href="./static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>login</h2>
+            <h3>Already have an account?</h3>
+            <ul>
+                <li><a href="signup">Patient Signup</a></li>
+                <li><a href="signup/facility">Facility Signup</a></li>
+            </ul>
+            <div class="form-card">
+                <img src="/static/images/signup.jpg" alt="">
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="auth-key">Authorization Key</label>
+                            <input type="text" id="auth-key" name="auth-key" required>
+                        </div>
+                        <div class="form-group radio-group">
+                            <label>
+                                <input type="radio" name="user-type" value="patient" required>
+                                Patient
+                            </label>
+                            <label>
+                                <input type="radio" name="user-type" value="facility" required>
+                                Facility
+                            </label>
+                        </div>
+                        <div class="form-actions">
+                            <!-- <button type="button" class="google-login" onclick="window.location.href='/auth/google'"><img src="/static/images/google.png" alt="google"> Login with Google</button> -->
+                            <button type="button" class="back" onclick="window.history.back();">Back</button>
+                            <button type="submit" class="login">Login</button>
+                        </div>
+                    </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <p>&copy; 2024 AfyaChain. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>

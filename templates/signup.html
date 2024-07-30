@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfyaChain - Revolutionizing Healthcare Management</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Patient Signup Form</h2>
+            <div class="form-card">
+                <img src="/static/images/signup.jpg" alt="">
+            <form action="/submit-signup" method="POST">
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                    <div class="password-instructions">
+                        Password must contain:<br>
+                        • At least 8 characters<br>
+                        • At least one Uppercase character (A-Z)<br>
+                        • At least one Lowercase character (a-z)<br>
+                        • At least one number (0-9)<br>
+                        • At least one Special character (~!@#$%^&*_-+=`|\(){}[]:;"'<>,.?/)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="sex">Sex</label>
+                    <select id="sex" name="sex" required>
+                        <option value="">Select your sex</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" id="country" name="country" required>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+                </div>
+                <div class="form-group">
+                    <label>Preferences</label>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="updates" name="updates">
+                        <label for="updates">Receive timely updates with the latest medical news and healthcare tips from us.</label>
+                    </div>
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">By clicking here you agree with our Terms Of Use.</label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="back" onclick="window.history.back();">Back</button>
+                    <button type="submit" class="register">Register</button>
+                </div>
+            </form> 
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <p>&copy; 2024 AfyaChain. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
