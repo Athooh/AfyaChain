@@ -14,7 +14,7 @@ var db *gorm.DB
 
 func ConnectDatabase() (db *gorm.DB, err error) {
 	// Database connection
-	dsn := "new_username:new_password@tcp(127.0.0.1:3306)/afya_chain_db?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:12345678@tcp(34.28.233.25:3306)/ehr_db?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
