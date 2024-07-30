@@ -7,7 +7,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-	"time"
 
 	"github.com/Athooh/HealthChain/Backend/database"
 	"github.com/Athooh/HealthChain/models"
@@ -45,8 +44,6 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
-
-
 func SignupFacilityHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/signup_facility.html"))
 	tmpl.Execute(w, nil)
@@ -73,36 +70,40 @@ func renderError(w http.ResponseWriter, code int, message string) {
 
 // CreatePatientHandler handles the creation of a new patient
 func CreatePatient(w http.ResponseWriter, r *http.Request) {
-	firstname := r.FormValue("firstname")
-	lastname := r.FormValue("lastname")
-	date, _ := time.Parse("2006-01-02", r.FormValue("date"))
+	firstname := r.FormValue("first_name")
+	lastname := r.FormValue("last_name")
 	phone := r.FormValue("phone")
 	email := r.FormValue("email")
 	address := r.FormValue("address")
 	gender := r.FormValue("gender")
 
+	// Connect to the database
+	db, err := database.ConnectDatabase()
+	if err != nil {
+		renderError(w, http.StatusInternalServerError, "HTTP status 500 - Internal Server Error")
+		return
+	}
+
+	// Create a new patient record
 	patient := models.Patient{
 		FirstName: firstname,
 		LastName:  lastname,
-		DOB:       date,
 		Phone:     phone,
 		Email:     email,
 		Address:   address,
 		Gender:    gender,
 	}
-	db, err := database.ConnectDatabase()
-	if err != nil {
-		renderError(w, 500, "HTTP status 500 - Internal Server Error")
+
+	// Save the patient record to the database
+	if err := db.Create(&patient).Error; err != nil {
+		renderError(w, http.StatusInternalServerError, "HTTP status 500 - Internal Server Error while inserting data")
 		return
 	}
-	result := db.Create(&patient)
-	if result.Error != nil {
-		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
-		return
-	}
+
+	// Respond with a success message
 	w.WriteHeader(http.StatusCreated)
 	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<tr><td>%s</td><td>%s</td></tr>", patient.FirstName, patient.LastName)
+	fmt.Fprintf(w, "<tr><td>%s</td><td>%s</td></tr>", firstname, lastname)
 }
 
 // GetPatientHandler retrieves a patient by ID

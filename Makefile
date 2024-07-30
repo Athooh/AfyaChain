@@ -1,6 +1,6 @@
 # Variables
-IMAGE_NAME = afya-chain-db
-CONTAINER_NAME = afya-chain-db
+IMAGE_NAME = afya__chain-db
+CONTAINER_NAME = afya---chain_db
 
 # Build the Docker image
 build:
@@ -8,7 +8,7 @@ build:
 
 # Run the Docker container
 run:
-	docker run --name $(CONTAINER_NAME) -d -p 3306:3306 $(IMAGE_NAME)
+	docker run --name $(CONTAINER_NAME) -d -p 3302:3306 $(IMAGE_NAME)
 	go run .
 
 # Stop the Docker container

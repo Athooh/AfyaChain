@@ -27,12 +27,14 @@ func main() {
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}
-	
+
+	http.HandleFunc("/dum", handler.Dummy)
 	http.HandleFunc("/patient", handler.CreatePatient) // Use POST for creating
-	http.HandleFunc("/all", handler.GetAllPatients) // Use POST for creating
+	http.HandleFunc("/all", handler.GetAllPatients)    // Use POST for creating
 	http.HandleFunc("/patient/", handler.GetPatientHandler)
 	http.HandleFunc("/", handler.HomeHandler)
 	http.HandleFunc("/about", handler.AboutHandler)
+	http.HandleFunc("/register", handler.Register)
 	http.HandleFunc("/admin", handler.Login)
 	http.HandleFunc("/login", handler.LoginHandler)
 	http.HandleFunc("/signup", handler.SignupHandler)

@@ -25,7 +25,6 @@ func CreatePatient(firstName, lastName string, dob time.Time, gender, email, pho
 	patient := &models.Patient{
 		FirstName: firstName,
 		LastName:  lastName,
-		DOB:       dob,
 		Gender:    gender,
 		Email:     email,
 		Phone:     phone,
@@ -71,7 +70,6 @@ func UpdatePatient(id int, firstName, lastName string, dob time.Time, gender, em
 	}
 	patient.FirstName = firstName
 	patient.LastName = lastName
-	patient.DOB = dob
 	patient.Gender = gender
 	patient.Email = email
 	patient.Phone = phone
