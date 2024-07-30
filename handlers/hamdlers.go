@@ -60,6 +60,11 @@ func DoctorDashHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl.Execute(w, nil)
 }
 
+func PatientDashHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/patients_dash.html"))
+	tmpl.Execute(w, nil)
+}
+
 // func renderForm(w http.ResponseWriter, data PageData) {
 // 	tmpl := template.Must(template.ParseFiles("templates/form.html"))
 // 	err := tmpl.Execute(w, data)

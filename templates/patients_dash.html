@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AfyaChain - Revolutionizing Healthcare Management</title>
+    <link rel="stylesheet" href="/static/css/dash.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="dashboard">
+        <div class="sidebar" id="sidebar">
+          <h2>My Medical History</h2>
+          <div id="patientHistory"></div>
+        </div>
+        <div class="main-content">
+          <div class="header">
+            <h1>Patient Dashboard</h1>
+            <button class="logout-btn" onclick="logout()">Log Out</button>
+          </div>
+          <div class="patient-info">
+            <h2>My Information</h2>
+            <table id="patientInfoTable"></table>
+          </div>
+          <div class="medical-records">
+            <h2>Medical Records</h2>
+            <div id="medicalRecords"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="historyModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Full Medical Record</h2>
+          <div id="fullHistoryContent"></div>
+          <button class="btn" onclick="downloadRecord()">Download Record</button>
+          <div class="email-form">
+            <input type="email" id="emailInput" placeholder="Enter recipient's email">
+            <button class="btn" onclick="emailRecord()">Email Record</button>
+          </div>
+        </div>
+      </div>
+
+    <footer>
+        <div class="container">
+            <div class="logo">
+                <i class="fa-solid fa-stethoscope"></i>
+                <h3>AfyaChain</h3>
+            </div>
+            <p>&copy; 2024 AfyaChain. All rights reserved.</p>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script src="/static/js/patient.js"></script>
+</body>
+</html>
