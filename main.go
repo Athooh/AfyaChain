@@ -23,7 +23,7 @@ func main() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 	// Auto Migrate the schema
-	err = db.AutoMigrate(&models.Patient{}, &models.MedicalRecord{})
+	err = db.AutoMigrate(&models.Patient{})
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}
@@ -39,6 +39,8 @@ func main() {
 	http.HandleFunc("/login", handler.LoginHandler)
 	http.HandleFunc("/signup", handler.SignupHandler)
 	http.HandleFunc("/signup/facility", handler.SignupFacilityHandler)
+	http.HandleFunc("/facility/dashboard", handler.DoctorDashHandler)
+	http.HandleFunc("/patient/dashboard", handler.PatientDashHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	fmt.Println("Server started at http://localhost:8081")
 

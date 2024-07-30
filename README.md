@@ -1,93 +1,182 @@
-Here is the link to chatgpt response:
-https://chatgpt.com/share/25532be1-0310-4042-a301-9087970b77b9
+# AfyaChain
 
+AfyaChain is an electronic medical record and healthcare management information system designed to securely handle patient records using blockchain technology for data integrity and Go for the backend. The application manages patient data, medical records, and user access while ensuring data security and scalability.
 
-Backend (Go)
-cmd/server/
-main.go: The entry point of the application, initializing the server, setting up routes, and starting the server.
-internal/
-api/:
+## Table of Contents
 
-handlers/: Contains handlers for various endpoints.
-health_records.go: Handles requests related to health records creation, viewing, and updating.
-patient_access.go: Manages patient data access requests.
-claims_management.go: Manages medical claims processing.
-research_trials.go: Handles requests related to clinical research and trials.
-router.go: Defines the routes for the API endpoints and associates them with the appropriate handlers.
-config/:
+- [Features](#features)
+- [Technologies](#technologies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Endpoints](#api-endpoints)
+- [Database Schema](#database-schema)
+- [Folder Structure](#folder-structure)
+- [Contributing](#contributing)
+- [License](#license)
 
-config.go: Configuration settings for the application, such as database credentials, blockchain network settings, etc.
-database/:
+## Features
 
-database.go: Initializes the database connection and provides functions for interacting with the database.
-middleware/:
+- **Patient Management**: Create, read, update, and delete patient records.
+- **Medical Records**: Track and manage medical records associated with patients.
+- **User Access Logs**: Log user actions for auditing and security purposes.
+- **Blockchain Integration**: Utilize blockchain technology for ensuring the integrity and immutability of patient data.
+- **Responsive UI**: Serve web pages with dynamic content through HTML templates.
+- **API Endpoints**: RESTful endpoints for interaction with the application.
 
-auth.go: Middleware for handling authentication, ensuring that requests are properly authenticated.
-logger.go: Middleware for logging HTTP requests and responses.
-models/:
+## Technologies
 
-health_record.go: Defines the data model for health records.
-patient.go: Defines the data model for patient information.
-claim.go: Defines the data model for medical claims.
-services/:
+- **Backend**: Go
+- **Database**: MySQL
+- **Blockchain**: Custom blockchain implementation using Go
+- **Frontend**: HTML, CSS, JavaScript
+- **Containerization**: Docker
+- **ORM**: GORM (for Go)
+- **Migrations**: Sequelize (for database schema management)
 
-health_records_service.go: Business logic for managing health records.
-patient_service.go: Business logic for managing patient data.
-claims_service.go: Business logic for managing medical claims.
-utils/:
+## Installation
 
-encryption.go: Utility functions for data encryption.
-hash.go: Utility functions for generating and verifying hash values.
-pkg/
-blockchain/:
+### Prerequisites
 
-client.go: Initializes the blockchain client and connects to the blockchain network.
-contracts.go: Contains the Go bindings for the Solidity smart contracts.
-transactions.go: Functions for creating and submitting transactions to the blockchain.
-auth/:
+- Go (1.18 or later)
+- MySQL
+- Docker (optional, for containerization)
 
-jwt.go: Functions for generating and verifying JSON Web Tokens (JWT) for authentication.
-go.mod and go.sum
-go.mod: The Go module file, listing the module's dependencies.
-go.sum: Checksums for verifying the integrity of the module's dependencies.
-Contracts (Solidity)
-HealthRecords.sol: Solidity smart contract for managing health records on the blockchain.
-ClaimsManagement.sol: Solidity smart contract for managing medical claims on the blockchain.
-Migrations.sol: Solidity contract for handling contract migrations.
-Migrations
-1_initial_migration.js: JavaScript file for deploying the initial set of contracts to the blockchain.
-Frontend
-doctor-portal/
-public/: Contains static files such as HTML, CSS, and images for the doctor portal.
-src/: Contains the source code for the doctor portal.
-components/: React components for various parts of the doctor portal.
-Login.js: Component for the login page.
-Dashboard.js: Component for the main dashboard.
-HealthRecord.js: Component for viewing and managing health records.
-Claims.js: Component for managing medical claims.
-Research.js: Component for accessing clinical research data.
-App.js: Main application component for the doctor portal.
-index.js: Entry point for the React application.
-package.json: Lists dependencies and scripts for building and running the doctor portal.
-webpack.config.js: Configuration file for Webpack, specifying how to bundle the frontend assets.
-patient-portal/
-public/: Contains static files such as HTML, CSS, and images for the patient portal.
-src/: Contains the source code for the patient portal.
-components/: React components for various parts of the patient portal.
-Login.js: Component for the login page.
-Dashboard.js: Component for the main dashboard.
-HealthData.js: Component for viewing personal health data.
-Insurance.js: Component for managing insurance information.
-Appointments.js: Component for managing appointments.
-App.js: Main application component for the patient portal.
-index.js: Entry point for the React application.
-package.json: Lists dependencies and scripts for building and running the patient portal.
-webpack.config.js: Configuration file for Webpack, specifying how to bundle the frontend assets.
-Build
-contracts/: Contains the compiled JSON files for the Solidity smart contracts.
-HealthRecords.json: Compiled output for the HealthRecords contract.
-ClaimsManagement.json: Compiled output for the ClaimsManagement contract.
-Migrations.json: Compiled output for the Migrations contract.
-Scripts
-deploy.js: Script for deploying the smart contracts to the blockchain.
-interact.js: Script for interacting with the deployed smart contracts.
+### Setting Up Locally
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/Athooh/AfyaChain.git
+   cd AfyaChain
+   ```
+
+2. **Install Go Dependencies**
+
+   ```bash
+   go mod download
+   ```
+
+3. **Set Up the Database**
+
+   - Update `database.go` with your database credentials.
+   - Run the SQL initialization script to set up the database schema:
+
+     ```bash
+     mysql -u [username] -p [database_name] < init.sql
+     ```
+
+4. **Build the Application**
+
+   ```bash
+   go build -o afyachain main.go
+   ```
+
+5. **Run the Application**
+
+   ```bash
+   ./afyachain
+   ```
+
+6. **(Optional) Run with Docker**
+
+   - Build the Docker image:
+
+     ```bash
+     docker build -t afyachain .
+     ```
+
+   - Run the Docker container:
+
+     ```bash
+     docker run -p 8080:8080 afyachain
+     ```
+
+## Usage
+
+- **Home Page**: Access the home page at `http://localhost:8080/`
+- **Patient Management**:
+  - **Create Patient**: Submit patient information via the `/create-patient` endpoint.
+  - **Get Patient**: Retrieve patient details via the `/patient?id=[id]` endpoint.
+  - **Get All Patients**: List all patients via the `/patients` endpoint.
+- **Medical Records**:
+  - **Create Record**: Create a new medical record via the `/create-record` endpoint.
+  - **Get Record**: Retrieve medical records via the `/record?id=[id]` endpoint.
+
+## API Endpoints
+
+### Patient Management
+
+- **POST /create-patient**
+  - **Request Body**: `firstname`, `lastname`, `date` (YYYY-MM-DD), `phone`, `email`, `address`, `gender`
+  - **Response**: `Patient Created`
+
+- **GET /patient**
+  - **Query Parameters**: `id` (int)
+  - **Response**: Patient details in JSON format
+
+- **GET /patients**
+  - **Response**: List of all patients in JSON format
+
+### Medical Records
+
+- **POST /create-record**
+  - **Request Body**: `patientID`, `recordDate` (YYYY-MM-DD), `condition`, `treatment`, `notes`
+  - **Response**: `Medical Record Created`
+
+- **GET /record**
+  - **Query Parameters**: `id` (int)
+  - **Response**: Medical record details in JSON format
+
+## Database Schema
+
+### Patients Table
+
+- **ID**: Integer, Primary Key, Auto Increment
+- **FirstName**: Varchar(100)
+- **LastName**: Varchar(100)
+- **DOB**: Date
+- **Gender**: Varchar(10)
+- **Email**: Varchar(100), Unique
+- **Phone**: Varchar(15)
+- **Address**: Varchar(255)
+- **CreatedAt**: Timestamp
+- **UpdatedAt**: Timestamp
+
+### MedicalRecords Table
+
+- **ID**: Integer, Primary Key, Auto Increment
+- **PatientID**: Integer, Foreign Key
+- **RecordDate**: Date
+- **Condition**: Text
+- **Treatment**: Text
+- **Notes**: Text
+- **CreatedAt**: Timestamp
+- **UpdatedAt**: Timestamp
+
+## Folder Structure
+
+- **`backend`**: Contains the core backend logic, including blockchain and database operations.
+- **`database`**: Manages database connections and CRUD operations.
+- **`migrations`**: Holds migration scripts for setting up the database schema.
+- **`models`**: Defines data models for patients and medical records.
+- **`static`**: Stores static files like CSS, JS, and images.
+- **`templates`**: HTML templates for rendering web pages.
+- **`Dockerfile`**: Configuration file for building the Docker image.
+- **`main.go`**: Entry point for the Go application.
+- **`Makefile`**: Defines build and management commands.
+- **`README.md`**: Documentation for the project.
+
+## Contributing
+
+Contributions are welcome! Please follow these steps to contribute:
+
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -am 'Add new feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
+
+## License
+
+The project is licensed under the MIT License. Please look at the [LICENSE](LICENSE) file for details.
+
