@@ -6,7 +6,6 @@ type Patient struct {
 	ID             int             `gorm:"primaryKey;autoIncrement" json:"id"`
 	FirstName      string          `gorm:"type:varchar(100);not null" json:"first_name"`
 	LastName       string          `gorm:"type:varchar(100);not null" json:"last_name"`
-	DOB            time.Time       `gorm:"not null" json:"dob"`
 	Gender         string          `gorm:"type:varchar(10);not null" json:"gender"`
 	Email          string          `gorm:"type:varchar(100);unique;not null" json:"email"`
 	Phone          string          `gorm:"type:varchar(15);not null" json:"phone"`
@@ -31,4 +30,10 @@ type AccessLog struct {
 	UserID    int    `json:"user_id"`
 	Action    string `json:"action"` // e.g., "view", "edit"
 	Timestamp string `json:"timestamp"`
+}
+type Credentials struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+	AuthKey  string `json:"authKey"`
+	UserType string `json:"userType"`
 }

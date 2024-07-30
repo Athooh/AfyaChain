@@ -14,18 +14,17 @@ var db *gorm.DB
 
 func ConnectDatabase() (db *gorm.DB, err error) {
 	// Database connection
-	dsn := "new_username:new_password@tcp(127.0.0.1:3306)/afya_chain_db?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := "root:12345678@tcp(34.28.233.25:3306)/ehr_db?charset=utf8mb4&parseTime=True&loc=Local"
 	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
 	return db, nil
 }
-func CreatePatient(firstName, lastName string, dob time.Time, gender, email, phone, address string) *models.Patient {
+func CreatePatient(firstName, lastName string, gender, email, phone, address string) *models.Patient {
 	patient := &models.Patient{
 		FirstName: firstName,
 		LastName:  lastName,
-		DOB:       dob,
 		Gender:    gender,
 		Email:     email,
 		Phone:     phone,
@@ -59,7 +58,7 @@ func GetPatient(id int) *models.Patient {
 	return &patient
 }
 
-func UpdatePatient(id int, firstName, lastName string, dob time.Time, gender, email, phone, address string) *models.Patient {
+func UpdatePatient(id int, firstName, lastName string, gender, email, phone, address string) *models.Patient {
 	patient := GetPatient(id)
 	db, err := ConnectDatabase()
 	if err != nil {
@@ -71,7 +70,6 @@ func UpdatePatient(id int, firstName, lastName string, dob time.Time, gender, em
 	}
 	patient.FirstName = firstName
 	patient.LastName = lastName
-	patient.DOB = dob
 	patient.Gender = gender
 	patient.Email = email
 	patient.Phone = phone

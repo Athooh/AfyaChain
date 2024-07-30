@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./static/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
     <header>
@@ -24,8 +25,8 @@
                 </ul>
             </nav>
         </div>
+        
     </header>
-
     <main>
         <div class="form-container">
             <h2>login</h2>
@@ -36,7 +37,7 @@
             </ul>
             <div class="form-card">
                 <img src="/static/images/signup.jpg" alt="">
-                    <form action="/login" method="POST">
+                    <form id="loginForm" >
                         <div class="form-group">
                             <label for="username">Email</label>
                             <input type="text" id="email" name="email" required placeholder="yourname@example.com">
@@ -64,6 +65,7 @@
                             <button type="button" class="back" onclick="window.history.back();">Back</button>
                             <button type="submit" class="login">Login</button>
                         </div>
+                        <div id="message"></div> 
                     </form>
             </div>
         </div>

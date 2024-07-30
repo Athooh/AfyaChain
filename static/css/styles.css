@@ -528,6 +528,9 @@ input#updates, input#terms  {
 .form-actions button.register:hover {
     background-color: var(--green);
 }
+#message {
+    color: red;
+}
 
 button.google-login {
     background-color: #0077b6;
