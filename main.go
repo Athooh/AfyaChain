@@ -29,6 +29,7 @@ func main() {
 	http.HandleFunc("/patient/", handler.GetPatientHandler)
 	http.HandleFunc("/", handler.HomeHandler)
 	http.HandleFunc("/about", handler.AboutHandler)
+	http.HandleFunc("/admin", handler.Login)
 	http.HandleFunc("/login", handler.LoginHandler)
 	http.HandleFunc("/signup", handler.SignupHandler)
 	http.HandleFunc("/signup/facility", handler.SignupFacilityHandler)
