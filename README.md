@@ -1,3 +1,161 @@
+# AfyaChain Blockchain-Based Healthcare System
+
+## Table of Contents
+
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [Architecture](#architecture)
+4. [Setup and Installation](#setup-and-installation)
+    - [Prerequisites](#prerequisites)
+    - [Backend Setup (Go)](#backend-setup-go)
+    - [Smart Contracts Setup (Solidity)](#smart-contracts-setup-solidity)
+5. [Usage](#usage)
+6. [Directory Structure](#directory-structure)
+7. [Contributing](#contributing)
+8. [License](#license)
+
+---
+
+## Project Overview
+
+AfyaChain's Blockchain-Based Healthcare System is designed to enhance the management and exchange of healthcare data using blockchain technology. This system aims to provide secure, immutable, and decentralized storage and access to patient health records, integrating various healthcare providers, patients, and insurance companies into a unified network.
+
+## Features
+
+- **Electronic Health Records Management**: Securely create, edit, and store patient health records.
+- **Personal Health Records Access**: Patients can access their health data anytime.
+- **Medical Claims Management**: Streamlined sharing of health data for insurance claims.
+- **Clinical Research and Trials**: Access to anonymized patient data for research.
+- **Automated Doctor Referrals Processing**: Efficient handling of doctor referrals.
+- **User Authorization and Data Access Verification**: Multi-factor authentication and private ID-based access.
+- **Data Security and HIPAA Compliance**: Ensuring data encryption and secure access.
+
+## Architecture
+
+The system is composed of the following key components:
+- **Blockchain Network**: A distributed ledger storing all patient health records.
+- **Smart Contracts**: Written in Solidity to handle record creation, validation, and access authorization.
+- **Backend**: Built with Go, providing APIs for frontend applications.
+- **Frontend**: Interfaces for patients and healthcare providers to interact with the system.
+
+## Setup and Installation
+
+### Prerequisites
+
+- Go 1.16 or higher
+- Node.js and npm
+- Solidity Compiler (solc)
+
+### Backend Setup (Go)
+
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/yourusername/afya-chain.git
+    cd afya-chain
+    ```
+
+2. **Install Dependencies**:
+    Ensure you have Go installed. Navigate to the `backend` directory and run:
+    ```bash
+    cd backend
+    go mod tidy
+    ```
+
+3. **Environment Variables**:
+    Create a `.env` file in the `backend` directory with the following content:
+    ```env
+    PORT=8080
+    DB_HOST=localhost
+    DB_PORT=5432
+    DB_USER=yourusername
+    DB_PASSWORD=yourpassword
+    DB_NAME=yourdbname
+    ```
+
+4. **Run the Backend**:
+    ```bash
+    go run main.go
+    ```
+
+### Smart Contracts Setup (Solidity)
+
+1. **Install solc**:
+    Ensure you have Node.js installed, then install the Solidity compiler globally:
+    ```bash
+    npm install -g solc
+    ```
+
+2. **Write and Compile Smart Contracts**:
+    Create a Solidity file named `HelloWorld.sol`:
+    ```solidity
+    // SPDX-License-Identifier: MIT
+    pragma solidity ^0.8.0;
+
+    contract HelloWorld {
+        string public greet = "Hello, World!";
+    }
+    ```
+
+    Compile the contract:
+    ```bash
+    solcjs --bin --abi HelloWorld.sol
+    ```
+
+3. **Generate Go Bindings for Smart Contracts**:
+    Install the `abigen` tool from go-ethereum:
+    ```bash
+    go get -u github.com/ethereum/go-ethereum/cmd/abigen
+    ```
+
+    Generate the Go bindings:
+    ```bash
+    abigen --sol HelloWorld.sol --pkg main --out HelloWorld.go
+    ```
+
+## Usage
+
+1. **Start the Backend**:
+    Ensure the backend is running:
+    ```bash
+    go run main.go
+    ```
+
+2. **Interact with the Smart Contract**:
+    Use the Go bindings to deploy and interact with the smart contract. Example code can be found in the `examples` directory.
+
+3. **Access the Frontend**:
+    Navigate to the frontend directory, install dependencies, and start the frontend application.
+
+## Directory Structure
+
+```
+afya-chain/
+├── backend/
+│   ├── main.go
+│   ├── handlers/
+│   ├── models/
+│   ├── routes/
+│   └── .env
+├── contracts/
+│   ├── HelloWorld.sol
+│   └── HelloWorld.go
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   └── package.json
+└── README.md
+```
+
+## Contributing
+
+We welcome contributions! Please read our [contributing guidelines](CONTRIBUTING.md) for details on the code of conduct and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+********************************
+
 Here is the link to chatgpt response:
 https://chatgpt.com/share/25532be1-0310-4042-a301-9087970b77b9
 
