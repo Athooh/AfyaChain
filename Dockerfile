@@ -1,26 +1,14 @@
-# Use the official Golang image from Bitnami
-FROM bitnami/golang:1.22.2
+# Use the official MySQL image from the Docker Hub
+FROM mysql:8.0
 
+# Set environment variables for the MySQL database
+ENV MYSQL_ROOT_PASSWORD=root_password
+ENV MYSQL_DATABASE=afya_chain_db
+ENV MYSQL_USER=new_username
+ENV MYSQL_PASSWORD=new_password
 
-# Metadata
-LABEL maintainer="oathooh@gmail.com"
-LABEL version="1.0"
-LABEL description="A Go web server for AfyaChain Web platform"
+# Copy the initialization SQL script to the Docker image
+COPY init.sql /docker-entrypoint-initdb.d/
 
-# Set the Current Working Directory inside the container
-WORKDIR /app
-
-# Copy go.mod and go.sum files
-COPY go.mod ./
-
-# Copy the source code into the container
-COPY . .
-
-# Build the Go app
-RUN go build -o main .
-
-# Expose port 8080 to the outside world
-EXPOSE 8080
-
-# Command to run the executable
-CMD ["./main"]
+# Expose the MySQL port
+EXPOSE 3306

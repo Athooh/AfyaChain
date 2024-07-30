@@ -2,27 +2,29 @@ package models
 
 import "time"
 
-type MedicalRecord struct {
-	ID         int       `json:"id"`
-	PatientID  int       `json:"patient_id"` // Foreign key reference
-	RecordDate time.Time `json:"record_date"`
-	Condition  string    `json:"condition"`
-	Treatment  string    `json:"treatment"`
-	Notes      string    `json:"notes"`
+type Patient struct {
+	ID             int             `gorm:"primaryKey;autoIncrement" json:"id"`
+	FirstName      string          `gorm:"type:varchar(100);not null" json:"first_name"`
+	LastName       string          `gorm:"type:varchar(100);not null" json:"last_name"`
+	DOB            time.Time       `gorm:"not null" json:"dob"`
+	Gender         string          `gorm:"type:varchar(10);not null" json:"gender"`
+	Email          string          `gorm:"type:varchar(100);unique;not null" json:"email"`
+	Phone          string          `gorm:"type:varchar(15);not null" json:"phone"`
+	Address        string          `gorm:"type:varchar(255)" json:"address"`
+	MedicalRecords []MedicalRecord `gorm:"foreignKey:PatientID" json:"medical_records"`
+	CreatedAt      time.Time       `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt      time.Time       `gorm:"autoUpdateTime" json:"updated_at"`
 }
 
-type Patient struct {
-	ID             int             `json:"id"`
-	FirstName      string          `json:"first_name"`
-	LastName       string          `json:"last_name"`
-	DOB            time.Time       `json:"dob"`
-	Gender         string          `json:"gender"`
-	Email          string          `json:"email"`
-	Phone          string          `json:"phone"`
-	Address        string          `json:"address"`
-	MedicalRecords []MedicalRecord `json:"medical_records"` // Slice of medical records
-	CreatedAt      time.Time       `json:"created_at"`
-	UpdatedAt      time.Time       `json:"updated_at"`
+type MedicalRecord struct {
+	ID         int       `gorm:"primaryKey;autoIncrement" json:"id"`
+	PatientID  int       `gorm:"not null" json:"patient_id"`
+	RecordDate time.Time `gorm:"not null" json:"record_date"`
+	Condition  string    `gorm:"type:text;not null" json:"condition"`
+	Treatment  string    `gorm:"type:text" json:"treatment"`
+	Notes      string    `gorm:"type:text" json:"notes"`
+	CreatedAt  time.Time `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt  time.Time `gorm:"autoUpdateTime" json:"updated_at"`
 }
 type AccessLog struct {
 	PatientID int    `json:"patient_id"`
