@@ -21,7 +21,7 @@ func ConnectDatabase() (db *gorm.DB, err error) {
 	}
 	return db, nil
 }
-func CreatePatient(firstName, lastName string, dob time.Time, gender, email, phone, address string) *models.Patient {
+func CreatePatient(firstName, lastName string, gender, email, phone, address string) *models.Patient {
 	patient := &models.Patient{
 		FirstName: firstName,
 		LastName:  lastName,
@@ -58,7 +58,7 @@ func GetPatient(id int) *models.Patient {
 	return &patient
 }
 
-func UpdatePatient(id int, firstName, lastName string, dob time.Time, gender, email, phone, address string) *models.Patient {
+func UpdatePatient(id int, firstName, lastName string, gender, email, phone, address string) *models.Patient {
 	patient := GetPatient(id)
 	db, err := ConnectDatabase()
 	if err != nil {
