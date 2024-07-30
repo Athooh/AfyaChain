@@ -40,9 +40,9 @@ func main() {
 	http.HandleFunc("/signup", handler.SignupHandler)
 	http.HandleFunc("/signup/facility", handler.SignupFacilityHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
-	fmt.Println("Server started at http://localhost:8080")
+	fmt.Println("Server started at http://localhost:8081")
 
-	err1 := http.ListenAndServe(":8080", nil)
+	err1 := http.ListenAndServe(":8081", nil)
 	if err1 != nil {
 		fmt.Println("Error starting server:", err)
 	}

@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        const authKey = document.getElementById('auth-key').value;
+        const authKey= document.getElementById('auth-key').value;
         const userType = document.querySelector('input[name="user-type"]:checked').value;
 
         const response = await fetch('/admin', {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ username, password, authKey, userType })
+            body: JSON.stringify({ username, password, authKey,userType })
         });
 
         const data = await response.json(); // Parse the response as JSON

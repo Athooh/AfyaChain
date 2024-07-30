@@ -3,83 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patient Registration</title>
+    <title>User Registration</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
+            background-color: white;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
         }
-        h1 {
+        h2 {
             text-align: center;
-            color: #333;
         }
-        label {
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
             display: block;
-            margin: 10px 0 5px;
+            margin-bottom: 5px;
         }
-        input, select {
+        .form-group input {
             width: 100%;
-            padding: 10px;
-            margin: 5px 0 20px;
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        button {
-            background-color: #28a745;
-            color: white;
+        .form-group button {
+            width: 100%;
             padding: 10px;
+            background-color: #28a745;
             border: none;
             border-radius: 4px;
+            color: white;
             cursor: pointer;
-            width: 100%;
         }
-        button:hover {
+        .form-group button:hover {
             background-color: #218838;
+        }
+        .message {
+            margin-top: 10px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>Patient Registration</h1>
-    <form id="patientForm" method="post" action="/patient">
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name" required>
-
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name" required>
-
-        <label for="gender">Gender:</label>
-        <select id="gender" name="gender" required>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-        </select>
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required>
-
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address">
-
-        <button type="submit">Register Patient</button>
-    </form>
-</div>
-
-
-
+    <div class="container">
+        <h2>User Registration</h2>
+        <form id="registerForm" action="/register" method="POST">
+            <div class="form-group">
+                <label for="name">Username</label>
+                <input type="text" id="sname" name="sname" required>
+            </div>
+            <div class="form-group">
+                <label for="Pass">Password</label>
+                <input type="password" id="Pass" name="passwd" required>
+            </div>
+            <div class="form-group">
+                <label for="Auth">Auth Key</label>
+                <input type="text" id="Auth" name="auth" required>
+            </div>
+            <div class="form-group">
+                <label for="type">User Type</label>
+                <input type="text" id="type" name="type" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+            <div class="message" id="message"></div>
+        </form>
+        
+    </div>
 </body>
 </html>

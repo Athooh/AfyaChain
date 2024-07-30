@@ -34,6 +34,6 @@ type AccessLog struct {
 type Credentials struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
-	AuthKey  string `json:"authkey"`
-	UserType string `json:"usertype"`
+	AuthKey  string `json:"authKey"`
+	UserType string `json:"userType"`
 }
