@@ -37,6 +37,7 @@ func main() {
 	http.HandleFunc("/signup", handler.SignupHandler)
 	http.HandleFunc("/signup/facility", handler.SignupFacilityHandler)
 	http.HandleFunc("/facility/dashboard", handler.DoctorDashHandler)
+	http.HandleFunc("/patient/dashboard", handler.PatientDashHandler)
 	http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	fmt.Println("Server started at http://localhost:8080")
 
