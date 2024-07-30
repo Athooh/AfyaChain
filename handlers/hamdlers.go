@@ -1,12 +1,13 @@
 package handler
 
 import (
-	"database/sql"
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/Athooh/HealthChain/Backend/database"
 	"github.com/Athooh/HealthChain/models"
@@ -73,45 +74,38 @@ func renderError(w http.ResponseWriter, code int, message string) {
 	}
 }
 
-var db *sql.DB
-
-// SetDB sets the database connection for the handlers
-func SetDB(databaseConnection *sql.DB) {
-	db = databaseConnection
-}
-
-// HealthCheck checks the database connectivity
-func HealthCheck(w http.ResponseWriter, r *http.Request) {
-	err := db.Ping()
-	if err != nil {
-		http.Error(w, "Database connection is not available", http.StatusInternalServerError)
-		return
-	}
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Database connection is healthy"))
-}
-
 // CreatePatientHandler handles the creation of a new patient
-func CreatePatientHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
+func CreatePatient(w http.ResponseWriter, r *http.Request) {
+	firstname := r.FormValue("firstname")
+	lastname := r.FormValue("lastname")
+	date, _ := time.Parse("2006-01-02", r.FormValue("date"))
+	phone := r.FormValue("phone")
+	email := r.FormValue("email")
+	address := r.FormValue("address")
+	gender := r.FormValue("gender")
 
-	var patient models.Patient
-	if err := json.NewDecoder(r.Body).Decode(&patient); err != nil {
-		http.Error(w, "Bad request: "+err.Error(), http.StatusBadRequest)
-		return
+	patient := models.Patient{
+		FirstName: firstname,
+		LastName:  lastname,
+		DOB:       date,
+		Phone:     phone,
+		Email:     email,
+		Address:   address,
+		Gender:    gender,
 	}
-
-	err := database.CreatePatient(db, &patient)
+	db, err := database.ConnectDatabase()
 	if err != nil {
-		http.Error(w, "Failed to create patient: "+err.Error(), http.StatusInternalServerError)
+		renderError(w, 500, "HTTP status 500 - Internal Server Error")
 		return
 	}
-
+	result := db.Create(&patient)
+	if result.Error != nil {
+		http.Error(w, result.Error.Error(), http.StatusInternalServerError)
+		return
+	}
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(patient)
+	w.Header().Set("Content-Type", "text/html")
+	fmt.Fprintf(w, "<tr><td>%s</td><td>%s</td></tr>", patient.FirstName, patient.LastName)
 }
 
 // GetPatientHandler retrieves a patient by ID
@@ -127,7 +121,7 @@ func GetPatientHandler(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	patient, err := database.GetPatient(db, num)
+	patient := database.GetPatient(num)
 	if err != nil {
 		http.Error(w, "Patient not found: "+err.Error(), http.StatusNotFound)
 		return
@@ -135,4 +129,25 @@ func GetPatientHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(patient)
+}
+
+func GetAllPatients(w http.ResponseWriter, r *http.Request) {
+	db, err := database.ConnectDatabase()
+	if err != nil {
+		log.Printf("Error connecting to database: %v", err)
+		return
+	}
+	var patients []models.Patient
+	if err := db.Find(&patients).Error; err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	w.Header().Set("Content-Type", "application/json")
+	sendJSONResponse(w, patients, http.StatusOK)
+}
+
+func sendJSONResponse(w http.ResponseWriter, data interface{}, statusCode int) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(statusCode)
+	json.NewEncoder(w).Encode(data)
 }

@@ -8,24 +8,28 @@ import (
 
 	"github.com/Athooh/HealthChain/Backend/database"
 	handler "github.com/Athooh/HealthChain/handlers"
+	"github.com/Athooh/HealthChain/models"
 )
 
 func main() {
+
 	if len(os.Args) != 1 {
 		fmt.Println("Usage: go run .")
 		return
 	}
-	connStr := "user=afyadmin dbname=ehrdb password=pass host=localhost sslmode=disable"
-	db, err := database.OpenDatabase(connStr)
+
+	db, err := database.ConnectDatabase()
 	if err != nil {
-		log.Fatalf("Error opening database: %v", err)
+		log.Fatal("Failed to connect to database:", err)
 	}
-	defer db.Close()
-
-	handler.SetDB(db)
-
-	http.HandleFunc("/health", handler.HealthCheck)
-	http.HandleFunc("/patient", handler.CreatePatientHandler) // Use POST for creating
+	// Auto Migrate the schema
+	err = db.AutoMigrate(&models.Patient{}, &models.MedicalRecord{})
+	if err != nil {
+		log.Fatal("Failed to migrate database:", err)
+	}
+	
+	http.HandleFunc("/patient", handler.CreatePatient) // Use POST for creating
+	http.HandleFunc("/all", handler.GetAllPatients) // Use POST for creating
 	http.HandleFunc("/patient/", handler.GetPatientHandler)
 	http.HandleFunc("/", handler.HomeHandler)
 	http.HandleFunc("/about", handler.AboutHandler)
