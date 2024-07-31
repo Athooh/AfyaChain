@@ -3,6 +3,11 @@ module github.com/Athooh/HealthChain
 go 1.22.2
 
 require (
+<<<<<<< Updated upstream
+=======
+	github.com/jinzhu/gorm v1.9.16
+	github.com/joho/godotenv v1.5.1
+>>>>>>> Stashed changes
 	github.com/lib/pq v1.10.9
 	gorm.io/driver/mysql v1.5.7
 	gorm.io/gorm v1.25.11

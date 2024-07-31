@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"time"
 
+	backend "github.com/Athooh/HealthChain/Backend"
 	"github.com/Athooh/HealthChain/Backend/database"
 	"github.com/Athooh/HealthChain/models"
 )
@@ -52,6 +53,16 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 func SignupFacilityHandler(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles("templates/signup_facility.html"))
+	tmpl.Execute(w, nil)
+}
+
+func DoctorDashHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/doctors_dash.html"))
+	tmpl.Execute(w, nil)
+}
+
+func PatientDashHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles("templates/patients_dash.html"))
 	tmpl.Execute(w, nil)
 }
 
