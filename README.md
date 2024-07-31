@@ -19,7 +19,7 @@ AfyaChain is an electronic medical record and healthcare management information 
 - **Patient Management**: Create, read, update, and delete patient records.
 - **Medical Records**: Track and manage medical records associated with patients.
 - **User Access Logs**: Log user actions for auditing and security purposes.
-- **Blockchain Integration**: Utilize blockchain technology for ensuring the integrity and immutability of patient data.
+- **Blockchain Integration**: Utilize blockchain technology to ensure patient data's integrity and immutability.
 - **Responsive UI**: Serve web pages with dynamic content through HTML templates.
 - **API Endpoints**: RESTful endpoints for interaction with the application.
 
@@ -53,7 +53,7 @@ AfyaChain is an electronic medical record and healthcare management information 
 2. **Install Go Dependencies**
 
    ```bash
-   go mod download
+   go mod AfyaChain
    ```
 
 3. **Set Up the Database**
@@ -77,23 +77,9 @@ AfyaChain is an electronic medical record and healthcare management information 
    ./afyachain
    ```
 
-6. **(Optional) Run with Docker**
-
-   - Build the Docker image:
-
-     ```bash
-     docker build -t afyachain .
-     ```
-
-   - Run the Docker container:
-
-     ```bash
-     docker run -p 8080:8080 afyachain
-     ```
-
 ## Usage
 
-- **Home Page**: Access the home page at `http://localhost:8080/`
+- **Home Page**: Access the home page at `http://localhost:8081/`
 - **Patient Management**:
   - **Create Patient**: Submit patient information via the `/create-patient` endpoint.
   - **Get Patient**: Retrieve patient details via the `/patient?id=[id]` endpoint.
@@ -175,6 +161,14 @@ Contributions are welcome! Please follow these steps to contribute:
 3. Commit your changes (`git commit -am 'Add new feature'`).
 4. Push to the branch (`git push origin feature/YourFeature`).
 5. Open a pull request.
+
+##Authors
+
+1. [Seth Athooh](https://github.com/Athooh)
+2. [Bravian Nyatoro](https://github.com/bravian1)
+3. [Raymond Caleb](https://github.com/raymond9734)
+4. [Vincent Odhiambo](https://github.com/Vincent-Omondi)
+5. [Stella Oiro](https://github.com/Stella-Achar-Oiro)
 
 ## License
 
