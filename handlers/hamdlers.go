@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -80,12 +81,38 @@ func renderError(w http.ResponseWriter, code int, message string) {
 }
 
 func CreatePatient(w http.ResponseWriter, r *http.Request) {
-	firstname := r.FormValue("first_name")
-	lastname := r.FormValue("last_name")
-	phone := r.FormValue("phone")
-	email := r.FormValue("email")
-	address := r.FormValue("address")
-	gender := r.FormValue("gender")
+	var signupData models.SignupForm
+
+	// Check Content-Type
+	if r.Header.Get("Content-Type") != "application/x-www-form-urlencoded" {
+		http.Error(w, "Content-Type must be application/x-www-form-urlencoded", http.StatusUnsupportedMediaType)
+		return
+	}
+
+	// Parse the form data
+	err := r.ParseForm()
+	if err != nil {
+		log.Printf("Error parsing form: %v", err)
+		http.Error(w, "Bad request", http.StatusBadRequest)
+		return
+	}
+
+	// Retrieve form values into the struct
+	signupData.FirstName = r.FormValue("firstname")
+	signupData.LastName = r.FormValue("lastname")
+	signupData.Phone = r.FormValue("phone")
+	signupData.Password = r.FormValue("password")
+	signupData.ConfirmPassword = r.FormValue("confirm-password")
+	signupData.Sex = r.FormValue("sex")
+	signupData.Country = r.FormValue("country")
+	signupData.City = r.FormValue("city")
+	fmt.Println(signupData.Password)
+
+	// Check if password and confirm password match
+	if signupData.Password != signupData.ConfirmPassword {
+		http.Error(w, "Passwords do not match", http.StatusBadRequest)
+		return
+	}
 	difficulty := 4 // Example difficulty value; adjust as needed
 
 	// Connect to the database
@@ -95,26 +122,16 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create a new patient record
-	patient := models.Patient{
-		FirstName: firstname,
-		LastName:  lastname,
-		Phone:     phone,
-		Email:     email,
-		Address:   address,
-		Gender:    gender,
-	}
-
 	// Save the patient record to the database
-	if err := db.Create(&patient).Error; err != nil {
+	if err := db.Create(&signupData).Error; err != nil {
 		renderError(w, http.StatusInternalServerError, "HTTP status 500 - Internal Server Error while inserting data")
 		return
 	}
 
 	// Create the initial blockchain with a genesis block for the new patient
 	genesisBlock := blockchain.Block{
-		PatientID:    0,               // No patient ID for the genesis block
-		UserID:       int(patient.ID), // Link to the patient
+		PatientID:    0,   // No patient ID for the genesis block
+		UserID:       123, // Link to the patient
 		Action:       "genesis",
 		Timestamp:    time.Now(),
 		PreviousHash: "0",
@@ -127,7 +144,7 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 
 	// Create the user blockchain
 	userBlockchain := blockchain.Blockchain{
-		UserID:     int(patient.ID),
+		UserID:     12,
 		Difficulty: difficulty,
 		Chain:      []blockchain.Block{genesisBlock}, // Initialize with the genesis block
 	}
@@ -141,10 +158,9 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 	// Respond with a success message
 	w.WriteHeader(http.StatusCreated)
 	w.Header().Set("Content-Type", "application/json")
-	response := struct {
-		FirstName string `json:"first_name"`
-		LastName  string `json:"last_name"`
-	}{firstname, lastname}
+	response := map[string]string{
+		"message": "created succesfuly",
+	}
 	json.NewEncoder(w).Encode(response)
 }
 

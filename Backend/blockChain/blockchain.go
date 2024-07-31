@@ -33,8 +33,8 @@ type BlockData struct {
 type Blockchain struct {
 	ID         uint    `gorm:"primaryKey" json:"id"`
 	UserID     int     `json:"user_id"`
-	Difficulty int     `json:"difficulty"`                     // Add difficulty field
-	Chain      []Block `gorm:"foreignKey:UserID" json:"chain"` // Assuming Block has a UserID field
+	Difficulty int     `json:"difficulty"`                        // Add difficulty field
+	Chain      []Block `gorm:"foreignKey:PatientID" json:"chain"` // Assuming Block has a UserID field
 }
 
 // CalculateHash calculates the hash of the block
