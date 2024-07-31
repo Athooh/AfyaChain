@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -29,9 +28,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
 		return
 	}
-
-	// Print the raw JSON data
-	log.Printf("Raw JSON request body: %s\n", body)
+	defer r.Body.Close() // Close the body after reading
 
 	// Decode JSON request body
 	err = json.Unmarshal(body, &creds) // Use Unmarshal since we already read the body
@@ -40,8 +37,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Bad request", http.StatusBadRequest)
 		return
 	}
-	fmt.Printf("Decoded credentials: %+v\n", creds)
 
+	// Connect to the database
 	db, err := database.ConnectDatabase()
 	if err != nil {
 		log.Printf("Error connecting to database: %v", err)
@@ -65,17 +62,26 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Compare the input password and auth key with stored values
-	if creds.Password == user.Password && creds.AuthKey == user.AuthKey {
-		response := map[string]string{"message": "Login successful"}
-		log.Println("Login successful")
-		w.WriteHeader(http.StatusOK) // Set status code to 200 OK
-		json.NewEncoder(w).Encode(response)
-	} else {
+	// if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(creds.Password)); err != nil {
+	// 	response := map[string]string{"message": "Invalid credentials"}
+	// 	log.Println("Login not successful: Incorrect password or auth key")
+	// 	w.WriteHeader(http.StatusUnauthorized) // Set status code to 401 Unauthorized
+	// 	json.NewEncoder(w).Encode(response)
+	// 	return
+	// }
+
+	if creds.AuthKey != user.AuthKey {
 		response := map[string]string{"message": "Invalid credentials"}
 		log.Println("Login not successful: Incorrect password or auth key")
 		w.WriteHeader(http.StatusUnauthorized) // Set status code to 401 Unauthorized
 		json.NewEncoder(w).Encode(response)
+		return
 	}
+
+	// Respond with the token and user type
+	response := map[string]string{"userType": user.UserType}
+	w.WriteHeader(http.StatusOK) // Set status code to 200 OK
+	json.NewEncoder(w).Encode(response)
 }
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
