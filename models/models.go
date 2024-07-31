@@ -1,6 +1,10 @@
 package models
 
-import "time"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 type Patient struct {
 	ID             int             `gorm:"primaryKey;autoIncrement" json:"id"`
@@ -36,4 +40,20 @@ type Credentials struct {
 	Password string `json:"password"`
 	AuthKey  string `json:"authKey"`
 	UserType string `json:"userType"`
+}
+type BlockD struct {
+	ID           uint      `gorm:"primaryKey"`
+	PatientID    int       `json:"patient_id"`
+	UserID       int       `json:"user_id"`
+	Action       string    `json:"action"`
+	Timestamp    time.Time `json:"timestamp"`
+	PreviousHash string    `json:"previous_hash"`
+	Hash         string    `json:"hash"`
+	Pow          int       `json:"pow"`
+	PreviousID   *uint     `gorm:"index"` // Foreign key to the previous block's ID
+}
+
+type Blockchain struct {
+	gorm.Model
+	Blocks []BlockD `gorm:"foreignKey:BlockchainID"`
 }

@@ -4,6 +4,7 @@ import (
 	"log"
 	"time"
 
+	blockchain "github.com/Athooh/HealthChain/Backend/blockChain"
 	"github.com/Athooh/HealthChain/models"
 	_ "github.com/lib/pq"
 	"gorm.io/driver/mysql"
@@ -79,6 +80,29 @@ func UpdatePatient(id int, firstName, lastName string, gender, email, phone, add
 		log.Printf("Error updating patient: %v", result.Error)
 		return nil
 	}
+	var userBlockchain blockchain.Blockchain
+	lastBlock := userBlockchain.Chain[len(userBlockchain.Chain)-1]
+	newBlock := blockchain.Block{
+		PatientID:    id,
+		UserID:       123,
+		Action:       "Update patient information (patient id) by dr(drId)",
+		Timestamp:    time.Now(),
+		PreviousHash: lastBlock.Hash,
+	}
+
+	// Mine the block and calculate its hash
+	newBlock.Mine(userBlockchain.Difficulty)
+	newBlock.Hash = newBlock.CalculateHash()
+	// Validate the new block before adding
+	if !userBlockchain.IsValidNewBlock(newBlock, lastBlock) {
+		log.Fatal("invalid block")
+	}
+	userBlockchain.Chain = append(userBlockchain.Chain, newBlock)
+
+	// Save the updated blockchain to the database
+	if err := db.Save(&userBlockchain).Error; err != nil {
+		log.Fatal(err)
+	}
 	return patient
 }
 
@@ -112,6 +136,7 @@ func CreateMedicalRecord(patientID int, recordDate time.Time, condition, treatme
 		log.Printf("Error creating medical record: %v", result.Error)
 		return nil
 	}
+
 	return medicalRecord
 }
 
@@ -125,7 +150,7 @@ func GetMedicalRecord(id int) *models.MedicalRecord {
 	return &medicalRecord
 }
 
-func UpdateMedicalRecord(id int, recordDate time.Time, condition, treatment, notes string) *models.MedicalRecord {
+func UpdateMedicalRecord(id, patient_id int, recordDate time.Time, condition, treatment, notes string) *models.MedicalRecord {
 	medicalRecord := GetMedicalRecord(id)
 	if medicalRecord == nil {
 		return nil
@@ -139,6 +164,29 @@ func UpdateMedicalRecord(id int, recordDate time.Time, condition, treatment, not
 		log.Printf("Error updating medical record: %v", result.Error)
 		return nil
 	}
+	var userBlockchain blockchain.Blockchain
+	lastBlock := userBlockchain.Chain[len(userBlockchain.Chain)-1]
+	newBlock := blockchain.Block{
+		PatientID:    patient_id,
+		UserID:       123,
+		Action:       "Update on patien (patient id) by dr(drId)",
+		Timestamp:    time.Now(),
+		PreviousHash: lastBlock.Hash,
+	}
+
+	// Mine the block and calculate its hash
+	newBlock.Mine(userBlockchain.Difficulty)
+	newBlock.Hash = newBlock.CalculateHash()
+	// Validate the new block before adding
+	if !userBlockchain.IsValidNewBlock(newBlock, lastBlock) {
+		log.Fatal("invalid block")
+	}
+	userBlockchain.Chain = append(userBlockchain.Chain, newBlock)
+
+	// Save the updated blockchain to the database
+	if err := db.Save(&userBlockchain).Error; err != nil {
+		log.Fatal(err)
+	}
 	return medicalRecord
 }
 
@@ -147,6 +195,29 @@ func DeleteMedicalRecord(id int) bool {
 	if result.Error != nil {
 		log.Printf("Error deleting medical record: %v", result.Error)
 		return false
+	}
+	var userBlockchain blockchain.Blockchain
+	lastBlock := userBlockchain.Chain[len(userBlockchain.Chain)-1]
+	newBlock := blockchain.Block{
+		PatientID:    id,
+		UserID:       123,
+		Action:       "delete medical record on patient (patient id) by dr(drId)",
+		Timestamp:    time.Now(),
+		PreviousHash: lastBlock.Hash,
+	}
+
+	// Mine the block and calculate its hash
+	newBlock.Mine(userBlockchain.Difficulty)
+	newBlock.Hash = newBlock.CalculateHash()
+	// Validate the new block before adding
+	if !userBlockchain.IsValidNewBlock(newBlock, lastBlock) {
+		log.Fatal("invalid block")
+	}
+	userBlockchain.Chain = append(userBlockchain.Chain, newBlock)
+
+	// Save the updated blockchain to the database
+	if err := db.Save(&userBlockchain).Error; err != nil {
+		log.Fatal(err)
 	}
 	return true
 }

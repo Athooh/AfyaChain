@@ -2,12 +2,13 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
+	blockchain "github.com/Athooh/HealthChain/Backend/blockChain"
 	"github.com/Athooh/HealthChain/Backend/database"
 	"github.com/Athooh/HealthChain/models"
 )
@@ -78,7 +79,6 @@ func renderError(w http.ResponseWriter, code int, message string) {
 	}
 }
 
-// CreatePatientHandler handles the creation of a new patient
 func CreatePatient(w http.ResponseWriter, r *http.Request) {
 	firstname := r.FormValue("first_name")
 	lastname := r.FormValue("last_name")
@@ -86,6 +86,7 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 	email := r.FormValue("email")
 	address := r.FormValue("address")
 	gender := r.FormValue("gender")
+	difficulty := 4 // Example difficulty value; adjust as needed
 
 	// Connect to the database
 	db, err := database.ConnectDatabase()
@@ -110,10 +111,41 @@ func CreatePatient(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// Create the initial blockchain with a genesis block for the new patient
+	genesisBlock := blockchain.Block{
+		PatientID:    0,               // No patient ID for the genesis block
+		UserID:       int(patient.ID), // Link to the patient
+		Action:       "genesis",
+		Timestamp:    time.Now(),
+		PreviousHash: "0",
+		Hash:         "", // Will be calculated later
+		Pow:          0,  // Proof of work (if used)
+	}
+
+	// Calculate the hash for the genesis block
+	genesisBlock.Hash = genesisBlock.CalculateHash()
+
+	// Create the user blockchain
+	userBlockchain := blockchain.Blockchain{
+		UserID:     int(patient.ID),
+		Difficulty: difficulty,
+		Chain:      []blockchain.Block{genesisBlock}, // Initialize with the genesis block
+	}
+
+	// Save the user blockchain to the database
+	if err := db.Create(&userBlockchain).Error; err != nil {
+		renderError(w, http.StatusInternalServerError, "HTTP status 500 - Internal Server Error while inserting user blockchain")
+		return
+	}
+
 	// Respond with a success message
 	w.WriteHeader(http.StatusCreated)
-	w.Header().Set("Content-Type", "text/html")
-	fmt.Fprintf(w, "<tr><td>%s</td><td>%s</td></tr>", firstname, lastname)
+	w.Header().Set("Content-Type", "application/json")
+	response := struct {
+		FirstName string `json:"first_name"`
+		LastName  string `json:"last_name"`
+	}{firstname, lastname}
+	json.NewEncoder(w).Encode(response)
 }
 
 // GetPatientHandler retrieves a patient by ID
