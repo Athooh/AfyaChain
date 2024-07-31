@@ -57,3 +57,13 @@ type Blockchain struct {
 	gorm.Model
 	Blocks []BlockD `gorm:"foreignKey:BlockchainID"`
 }
+type SignupForm struct {
+	FirstName       string `json:"firstname" form:"firstname" binding:"required"`
+	LastName        string `json:"lastname" form:"lastname" binding:"required"`
+	Phone           string `json:"phone" form:"phone" binding:"required"`
+	Password        string `json:"password" form:"password" binding:"required"`
+	ConfirmPassword string `json:"confirm_password" form:"confirm-password" binding:"required"`
+	Sex             string `json:"sex" form:"sex" binding:"required"`
+	Country         string `json:"country" form:"country" binding:"required"`
+	City            string `json:"city" form:"city" binding:"required"`
+}

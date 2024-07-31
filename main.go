@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 
+	blockchain "github.com/Athooh/HealthChain/Backend/blockChain"
 	"github.com/Athooh/HealthChain/Backend/database"
 	handler "github.com/Athooh/HealthChain/handlers"
 	"github.com/Athooh/HealthChain/models"
@@ -23,7 +24,7 @@ func main() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 	// Auto Migrate the schema
-	err = db.AutoMigrate(&models.Patient{})
+	err = db.AutoMigrate(&models.Patient{}, &models.SignupForm{}, &blockchain.Blockchain{}, &blockchain.Block{})
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}
