@@ -16,35 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     showFeature(currentFeatureIndex);
     setInterval(nextFeature, 5000);
 });
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-        e.preventDefault(); // Prevent the default form submission
 
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const authKey= document.getElementById('auth-key').value;
-        const userType = document.querySelector('input[name="user-type"]:checked').value;
-
-        const response = await fetch('/admin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ username, password, authKey,userType })
-        });
-
-        const data = await response.json(); // Parse the response as JSON
-        if (response.ok) {
-            if (data.userType === 'patient') {
-                window.location.href = '/';
-            } else if (data.userType === 'facility') {
-                window.location.href = '/facility-dashboard';
-            }
-        } else {
-            document.getElementById('message').textContent = data.message; // Display error message
-        }
-    });
-});
 
 // dashboard facility
 
@@ -214,13 +186,14 @@ function submitNewRecord() {
 }
 
 function logout() {
-  if (confirm("Are you sure you want to log out?")) {
-    alert("You have been logged out successfully.");
-    // Here you would typically redirect to a login page or perform other logout actions
-    // For this example, we'll just reload the page
-    location.reload();
+    if (confirm("Are you sure you want to log out?")) {
+  
+      alert("You have been logged out successfully.");
+      // Redirect to the login page
+      window.location.href = '/login'; // Update with your actual login page URL
+    }
   }
-}
+  
 
 // Modal close functionality
 const modal = document.getElementById("historyModal");
