@@ -27,75 +27,78 @@
 
     <main>
         <div class="form-container">
-            <h2>Patient Signup Form</h2>
+            <h2>Hospital Facility Signup</h2>
             <div class="form-card">
                 <img src="/static/images/signup.jpg" alt="">
-            <form action="/patient" method="POST">
-                <div class="form-group">
-                    <label for="firstname">First Name</label>
-                    <input type="text" id="firstname" name="firstname" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastname">Last Name</label>
-                    <input type="text" id="lastname" name="lastname" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                    <div class="password-instructions">
-                        Password must contain:<br>
-                        • At least 8 characters<br>
-                        • At least one Uppercase character (A-Z)<br>
-                        • At least one Lowercase character (a-z)<br>
-                        • At least one number (0-9)<br>
-                        • At least one Special character (~!@#$%^&*_-+=`|\(){}[]:;"'<>,.?/)
+                <form id="signup-form" method="POST">
+                    <div class="form-group">
+                        <label for="facility-name">Facility Name</label>
+                        <input type="text" id="facility-name" name="facility-name" required>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required>
-                </div>
-                <div class="form-group">
-                    <label for="sex">Sex</label>
-                    <select id="sex" name="sex" required>
-                        <option value="">Select your sex</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <input type="text" id="country" name="country" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">City</label>
-                    <input type="text" id="city" name="city" required>
-                </div>
-                <div class="form-group">
-                    <label>Preferences</label>
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="updates" name="updates">
-                        <label for="updates">Receive timely updates with the latest medical news and healthcare tips from us.</label>
+                    <div class="form-group">
+                        <label for="registration-number">Registration Number</label>
+                        <input type="text" id="registration-number" name="registration-number" required>
                     </div>
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="terms" name="terms" required>
-                        <label for="terms">By clicking here you agree with our Terms Of Use.</label>
+                    <div class="form-group">
+                        <label for="phone-number">Phone Number</label>
+                        <input type="tel" id="phone-number" name="phone-number" required>
                     </div>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="back" onclick="window.history.back();">Back</button>
-                    <button type="submit" class="register">Register</button>
-                </div>
-            </form> 
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <small>Password must contain:<br>
+                            • At least 8 characters<br>
+                            • At least one Uppercase character (A-Z)<br>
+                            • At least one Lowercase character (a-z)<br>
+                            • At least one number (0-9)<br>
+                            • At least one Special character (~!@#$%^&*_-+=`|\(){}[]:;"'<>,.?/)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" id="country" name="country" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-type">User Type</label>
+                        <select id="user-type" name="user-type" required>
+                            <option value="patient">Patient</option>
+                            <option value="facility">Facility</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preferences</label>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="updates" name="updates">
+                            <label for="updates">Receive timely updates with the latest medical news and healthcare tips from us.</label>
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <label for="terms">By clicking here you agree with our Terms Of Use.</label>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="back" onclick="window.history.back();">Back</button>
+                        <button type="submit" class="register">Register</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
-
     <footer>
         <div class="container">
             <div class="logo">
@@ -112,6 +115,43 @@
             </nav>
         </div>
     </footer>
-    <script src="/static/js/scripts.js"></script>
+    <script>
+        document.getElementById('user-type').addEventListener('change', function() {
+            var form = document.getElementById('signup-form');
+            if (this.value === 'facility') {
+                form.action = '/facilitylog';
+            } else {
+                form.action = '/patient';
+            }
+        });
+        
+        document.getElementById('signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+        
+            var form = event.target;
+            var formData = new FormData(form);
+        
+            fetch(form.action, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // If response is not OK, try to get the text message
+                    return response.text().then(text => { throw new Error(text) });
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                // Handle success response here
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Handle error response here
+            });
+        });
+        
+    </script>
 </body>
 </html>

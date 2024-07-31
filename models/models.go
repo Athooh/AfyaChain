@@ -67,3 +67,14 @@ type SignupForm struct {
 	Country         string `json:"country" form:"country" binding:"required"`
 	City            string `json:"city" form:"city" binding:"required"`
 }
+type Facility struct {
+	gorm.Model
+	FacilityName       string `json:"facility_name" gorm:"unique;not null"`
+	RegistrationNumber string `json:"registration_number" gorm:"unique;not null"`
+	PhoneNumber        string `json:"phone_number" gorm:"not null"`
+	Email              string `json:"email" gorm:"unique;not null"`
+	Password           string `json:"password" gorm:"not null"`
+	Country            string `json:"country" gorm:"not null"`
+	City               string `json:"city" gorm:"not null"`
+	Address            string `json:"address" gorm:"not null"`
+}

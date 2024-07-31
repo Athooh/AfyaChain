@@ -219,3 +219,28 @@ document.getElementById("fileUpload").addEventListener("change", function(event)
 
 // Initialize the dashboard
 searchPatient();
+// Function to generate a random authentication number
+function generateAuthNumber() {
+  // Generate a random number between 100000 and 999999
+  return Math.floor(100000 + Math.random() * 900000);
+}
+
+// Function to display the authentication number
+function showAuthNumber(authNumber) {
+  // Create a message element
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "auth-message"; // You can style this class in CSS
+  messageDiv.innerHTML = `Your authentication number is: <strong>${authNumber}</strong>`;
+  
+  // Append the message to the body or any specific container
+  document.body.appendChild(messageDiv);
+}
+
+// Example function to be called on successful signup
+function onSignupSuccess() {
+  const authNumber = generateAuthNumber(); // Generate the authentication number
+  showAuthNumber(authNumber); // Show the authentication number to the user
+}
+
+// Call the onSignupSuccess function for demonstration (replace this with your actual signup success callback)
+onSignupSuccess();

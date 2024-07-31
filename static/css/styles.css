@@ -653,4 +653,12 @@ footer {
 background-color: var(--deep-blue);
 color: var(--soft-white);
 }
+.auth-message {
+    padding: 10px;
+    margin-top: 20px;
+    border: 1px solid #4CAF50; /* Green border */
+    color: #4CAF50; /* Green text */
+    background-color: #e7f9e7; /* Light green background */
+    border-radius: 5px;
+}
 

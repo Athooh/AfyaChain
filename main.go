@@ -24,7 +24,7 @@ func main() {
 		log.Fatal("Failed to connect to database:", err)
 	}
 	// Auto Migrate the schema
-	err = db.AutoMigrate(&models.Patient{}, &models.SignupForm{}, &blockchain.Blockchain{}, &blockchain.Block{})
+	err = db.AutoMigrate(&models.Patient{}, &models.SignupForm{}, &blockchain.Blockchain{}, &blockchain.Block{}, &models.Facility{})
 	if err != nil {
 		log.Fatal("Failed to migrate database:", err)
 	}
@@ -34,6 +34,8 @@ func main() {
 	http.HandleFunc("/all", handler.GetAllPatients)    // Use POST for creating
 	http.HandleFunc("/patient/", handler.GetPatientHandler)
 	http.HandleFunc("/", handler.HomeHandler)
+	http.HandleFunc("/facilitylog", handler.FacilityLogin)
+	http.HandleFunc("/facilityReg", handler.RegisterFacility)
 	http.HandleFunc("/about", handler.AboutHandler)
 	http.HandleFunc("/register", handler.Register)
 	http.HandleFunc("/admin", handler.Login)
